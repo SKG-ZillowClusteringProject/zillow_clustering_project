@@ -67,8 +67,7 @@ def zillow17():
             WHERE prop.latitude IS NOT NULL
                   AND prop.longitude IS NOT NULL
                   AND transactiondate like '2017%'
-<<<<<<< HEAD
-    """
+            """
     
     return pd.read_sql(query, get_connection('zillow'))
 
@@ -90,8 +89,6 @@ def drop_based_on_pct(df, pc, pr):
     - threshold percent of non-null values for columns(# between 0-1), 
     - threshold percent of non-null values for rows(# between 0-1)
     Returns: a dataframe with the columns and rows dropped as indicated.
-=======
->>>>>>> 151ae8e9c5058badaf49d14fa1f4422bb428400d
     """
     tpc = 1-pc
     tpr = 1-pr
@@ -196,9 +193,7 @@ def wrangle_zillow():
     # create a categorical version of target by splitting into quartiles
     df['logerror_quartiles'] = pd.qcut(df.logerror, q=4, labels=['q1', 'q2', 'q3', 'q4'])
     
-    
-<<<<<<< HEAD
-=======
+
     return pd.read_sql(query, get_connection('zillow'))
 
 
@@ -327,5 +322,4 @@ def wrangle_zillow():
     df['logerror_quartiles'] = pd.qcut(df.logerror, q=4, labels=['q1', 'q2', 'q3', 'q4'])
     
     
->>>>>>> 151ae8e9c5058badaf49d14fa1f4422bb428400d
     return df
