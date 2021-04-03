@@ -1,21 +1,22 @@
+<span style="font-family:Futura; font-size:14pt">
+
+
 <div style="text-align:center"><img src="zillowprojlogo.png"/></div>
 
 ___
-
 <a id='navigation'></a>
 
-[[Scenario](#scenario)]
-[[Project Planning](#project-planning)]
-[[Key Findings](#key-findings)]
-[[Tested Hypotheses](#tested-hypotheses)]
-[[Take Aways](#take-aways)]
-[[Data Dictionary](#data-dictionary)]
-[[Workflow](#workflow)]
-
+<button class="button-save large">[Scenario](#scenario)</button>
+<button class="button-save large">[Project Planning](#project-planning)</button>
+<button class="button-save large">[Key Findings](#key-findings)</button>
+<button class="button-save large">[Tested Hypotheses](#tested-hypotheses)</button>
+<button class="button-save large">[Take Aways](#take-aways)</button>
+<button class="button-save large">[Data Dictionary](#data-dictionary)</button>
+<button class="button-save large">[Workflow](#workflow)</button>
 ___
-
-<a name="scenario"></a><h1><img src="sbar.png"/></h1>
-
+    
+    
+<div class="alert alert-block alert-info"><a name="scenario"></a><h1><i class="fas fa-home"></i> Scenario</h1></div>
 Selling homes in our new normal has just gotten easier with Zillow Offers®. Now home owners can hand over the burden of selling their property, by selling directly to us based on our state of the art Zestimate score.
 
 The accuracy and itegrity of our Zestimate score is of high importance. As a junior data scientists on the Zillow data science team, we are tasked with uncovering what drivers most affect the validity of the Zestimate score. This is measured by our target variable: `logerror`. Which is the difference between Zillow's estimated Zestimate and actual sale price. 
@@ -24,8 +25,8 @@ The accuracy and itegrity of our Zestimate score is of high importance. As a jun
 
 [Jump to Navigation](#navigation)
 
-<a name="project-planning"></a><h1><img src="ppbar.png"/></h1>
-
+<div class="alert alert-block alert-info"><a name="project-planning"></a><h1><i class="fab fa-trello"></i> Project Planning</h1></div>
+    
 ### Goal: 
 The goal for this project is to create a model that will accurately predict the Zestimate’s `logerror`. By doing so, we will uncover what features available on the Zillow Dataset are driving the amount of error.
 
@@ -65,23 +66,27 @@ The goal for this project is to create a model that will accurately predict the 
     
     
 [Jump to Navigation](#navigation)
+<div class="alert alert-block alert-info"><a name="key-findings"></a><h1><i class="fas fa-highlighter"></i> Key Findings</h1></div>
 
-<a name="key-findings"></a><h1><img src="kfbar.png"/></h1>
+
 
 
 [Jump to Navigation](#navigation)
+<div class="alert alert-block alert-info"><a name="tested-hypotheses"></a><h1><i class="fas fa-hippo"></i> Tested Hypotheses</h1></div>
 
-<a name="tested-hypotheses"></a><h1><img src="thbar.png"/></h1>
 
+
+
+[Jump to Navigation](#navigation)
+<div class="alert alert-block alert-info"><a name="take-aways"></a><h1><i class="fas fa-tasks"></i> Take Aways</h1></div>
+ 
+ 
+ 
+
+[Jump to Navigation](#navigation)
+<div class="alert alert-block alert-info"><a name="data-dictionary"></a><h1><i class="fas fa-book"></i> Data Dictionary</h1></div>
     
-[Jump to Navigation](#navigation)
-
-<a name="take-aways"></a><h1><img src="tabar.png"/></h1>
-
-
-[Jump to Navigation](#navigation)
-
-<a name="data-dictionary"></a><h1><img src="ddbar.png"/></h1>
+</span>
 
 | column_name              | description                                                                                                         | key | dtype    |
 |--------------------------|---------------------------------------------------------------------------------------------------------------------|-----|----------|
@@ -116,10 +121,11 @@ The goal for this project is to create a model that will accurately predict the 
 |                          |                                                                                                                     |     |          |
 |                          |                                                                                                                     |     |          |
 
+<span style="font-family:Futura; font-size:14pt">
     
 [Jump to Navigation](#navigation)
 
-<a name="workflow"></a><h1><img src="wbar.png"/></h1>
+<div class="alert alert-info" role="alert"><h1><i class="fas fa-project-diagram"><a name="workflow"></a></i> Workflow</h1></div>
 
     
 Please pull the repo first to use the following links to guide you through the data science pipeline. Enjoy!
@@ -153,33 +159,26 @@ Please pull the repo first to use the following links to guide you through the d
 
 
 
+</span>
+
+
+- I must also recover the following features:
+    - the state and county information for all of the properties
+    - distribution of tax rates for each county
+        - tax amounts and tax value of the home
 
 
 
 
 
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Well done!</h4>
+  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+  <hr>
+  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
