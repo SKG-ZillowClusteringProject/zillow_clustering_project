@@ -125,7 +125,7 @@ def outlier(df, feature, m):
 
 
     
-def clean_zillow():
+def clean_zillow(df):
     """
     clean_zillow will:
     - read in zillow.csv acquired from SQL query
@@ -141,7 +141,7 @@ def clean_zillow():
     - renames certain columns
     """
     
-    df = pd.read_csv('zillow.csv')
+    #df = pd.read_csv('zillow.csv')
     df = df.set_index("parcelid")
     
     # Restrict df to only properties that meet single-use criteria
@@ -242,7 +242,7 @@ def wrangle_zillow():
     return: the three split pandas dataframes-train/validate/test
     '''
     
-    df = clean_zillow(zillow_df())
+    df = clean_zillow(zillow17())
     return split_zillow(df)
 
 
