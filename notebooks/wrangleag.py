@@ -125,10 +125,10 @@ def outlier(df, feature, m):
 
 
     
-def wrangle_zillow():
+def clean_zillow(df):
     """
-    wrangle_zillow will:
-    - read in zillow.csv acquired from SQL query
+    clean_zillow will:
+    - read in df acquired from SQL query
     - filter data to single unit homes with min 1B/1B over 500 sqft
     - drop columns with 40%+ & rows 30%+ null
     - add a column for county names
@@ -141,7 +141,7 @@ def wrangle_zillow():
     - renames certain columns
     """
     
-    df = pd.read_csv('zillow.csv')
+    #df = pd.read_csv('zillow.csv')
     df = df.set_index("parcelid")
     
     # Restrict df to only properties that meet single-use criteria
@@ -209,3 +209,67 @@ def wrangle_zillow():
     
     
     return df
+
+
+
+
+
+def split_zillow(df):
+    """
+    split_zillow will take one argument(df) and 
+    then split our data into 20/80, 
+    then split the 80% into 30/70
+    
+    perform a train, validate, test split
+    
+    return: the three split pandas dataframes-train/validate/test
+    """  
+    
+    train_validate, test = train_test_split(df, test_size=0.2, random_state=3210)
+    train, validate = train_test_split(train_validate, train_size=0.7, random_state=3210)
+    return train, validate, test
+
+
+
+
+
+def wrangle_zillow():
+    '''
+    wrangle_zillow will: 
+    - read in zillow dataset for transaction dates between 05/2017-08/2017 as a pandas DataFrame,
+    - clean the data
+    - split the data
+    return: the three split pandas dataframes-train/validate/test
+    '''
+    
+    df = clean_zillow(zillow17())
+    return split_zillow(df)
+
+
+
+
+def scale_zillow(train, validate, test):
+    '''
+    scale_zillow will 
+    - fits a min-max scaler to the train split
+    - transforms all three spits using that scaler. 
+    returns: 3 dataframes with the same column names and scaled values. 
+    '''
+    
+    scaler = sklearn.preprocessing.MinMaxScaler()
+    
+    # Note that we only call .fit with the TRAINING data,
+    scaler.fit(train)
+    
+    # but we use .transform to apply the scaling to all the data splits.    
+    train_scaled = scaler.transform(train)
+    validate_scaled = scaler.transform(validate)
+    test_scaled = scaler.transform(test)
+    
+    # convert to arrays to pandas DFs
+    train_scaled = pd.DataFrame(train_scaled, columns=train.columns)
+    validate_scaled = pd.DataFrame(validate_scaled, columns=train.columns)
+    test_scaled = pd.DataFrame(test_scaled, columns=train.columns)
+    
+    return train_scaled, validate_scaled, test_scaled
+
