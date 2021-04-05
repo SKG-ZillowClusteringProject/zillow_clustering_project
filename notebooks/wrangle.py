@@ -25,9 +25,6 @@ def get_connection(db, user=user, host=host, password=password):
     return f'mysql+pymysql://{user}:{password}@{host}/{db}'
 
 
-
-
-
 def zillow17():
     '''
     This function reads in the zillow data from the Codeup db
@@ -68,7 +65,7 @@ def zillow17():
             LEFT JOIN typeconstructiontype construct USING (typeconstructiontypeid)
             WHERE prop.latitude IS NOT NULL
                   AND prop.longitude IS NOT NULL
-                  AND transactiondate like '2017%'
+                  AND transactiondate like '2017%%'
     """
     
     return pd.read_sql(query, get_connection('zillow'))
