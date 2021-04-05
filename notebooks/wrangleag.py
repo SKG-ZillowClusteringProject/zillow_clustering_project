@@ -161,10 +161,11 @@ def clean_zillow(df):
                                    'Ventura'))
     
     # Drop unnecessary/redundant columns
-    df = df.drop(['id',
-       'calculatedbathnbr', 'finishedsquarefeet12', 'fullbathcnt', 'heatingorsystemtypeid'
-       ,'propertycountylandusecode', 'propertylandusetypeid','propertyzoningdesc',
-        'censustractandblock', 'propertylandusedesc', 'heatingorsystemdesc'],axis=1)
+    df = df.drop(['id', 'calculatedbathnbr', 'finishedsquarefeet12', 
+                  'fullbathcnt', 'heatingorsystemtypeid', 
+                  'propertycountylandusecode', 'propertylandusetypeid', 
+                  'propertyzoningdesc', 'censustractandblock', 'propertylandusedesc', 
+                  'heatingorsystemdesc', 'assessmentyear', 'regionidcounty' ],axis=1)
     
     # Replace nulls in unitcnt with 1
     df.unitcnt.fillna(1, inplace = True)
@@ -184,8 +185,8 @@ def clean_zillow(df):
     df['home_age'] = 2021 - df.yearbuilt
     
     # List of cols to convert to 'int'
-    cols = ['fips', 'buildingqualitytypeid', 'bedroomcnt', 'roomcnt', 
-            'home_age', 'yearbuilt', 'assessmentyear', 'regionidcounty', 
+    cols = ['fips', 'buildingqualitytypeid', 'bedroomcnt', 
+            'roomcnt', 'home_age', 'yearbuilt', 
             'regionidzip', 'unitcnt', 'home_age']
     # loop through cols list in conversion
     for col in cols:

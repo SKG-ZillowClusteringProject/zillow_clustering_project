@@ -128,7 +128,7 @@ def outlier(df, feature, m):
 def wrangle_zillow():
     """
     wrangle_zillow will:
-    - read in zillow.csv acquired from SQL query
+    - read in df acquired from SQL query
     - filter data to single unit homes with min 1B/1B over 500 sqft
     - drop columns with 40%+ & rows 30%+ null
     - add a column for county names
@@ -141,7 +141,7 @@ def wrangle_zillow():
     - renames certain columns
     """
     
-    df = pd.read_csv('zillow.csv')
+    #df = pd.read_csv('zillow.csv')
     df = df.set_index("parcelid")
     
     # Restrict df to only properties that meet single-use criteria
@@ -161,10 +161,11 @@ def wrangle_zillow():
                                    'Ventura'))
     
     # Drop unnecessary/redundant columns
-    df = df.drop(['id',
-       'calculatedbathnbr', 'finishedsquarefeet12', 'fullbathcnt', 'heatingorsystemtypeid'
-       ,'propertycountylandusecode', 'propertylandusetypeid','propertyzoningdesc',
-        'censustractandblock', 'propertylandusedesc', 'heatingorsystemdesc'],axis=1)
+    df = df.drop(['id', 'calculatedbathnbr', 'finishedsquarefeet12', 
+                  'fullbathcnt', 'heatingorsystemtypeid', 
+                  'propertycountylandusecode', 'propertylandusetypeid', 
+                  'propertyzoningdesc', 'censustractandblock', 'propertylandusedesc', 
+                  'heatingorsystemdesc', 'assessmentyear', 'regionidcounty' ],axis=1)
     
     # Replace nulls in unitcnt with 1
     df.unitcnt.fillna(1, inplace = True)
@@ -184,8 +185,8 @@ def wrangle_zillow():
     df['home_age'] = 2021 - df.yearbuilt
     
     # List of cols to convert to 'int'
-    cols = ['fips', 'buildingqualitytypeid', 'bedroomcnt', 'roomcnt', 
-            'home_age', 'yearbuilt', 'assessmentyear', 'regionidcounty', 
+    cols = ['fips', 'buildingqualitytypeid', 'bedroomcnt', 
+            'roomcnt', 'home_age', 'yearbuilt', 
             'regionidzip', 'unitcnt', 'home_age']
     # loop through cols list in conversion
     for col in cols:
