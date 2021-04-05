@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from env import host, user, password
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import StandardScaler
+
 '''
 *------------------*
 |                  |
@@ -13,12 +14,14 @@ from sklearn.preprocessing import StandardScaler
 |                  |
 *------------------*
 '''
+
 def get_connection(db, user=user, host=host, password=password):
     '''
     This function uses my info from my env file to
     create a connection url to access the Codeup db.
     '''
     return f'mysql+pymysql://{user}:{password}@{host}/{db}'
+    
 def zillow17():
     '''
     This function reads in the zillow data from the Codeup db
@@ -58,9 +61,10 @@ def zillow17():
             LEFT JOIN typeconstructiontype construct USING (typeconstructiontypeid)
             WHERE prop.latitude IS NOT NULL
                   AND prop.longitude IS NOT NULL
-                  AND transactiondate like '2017%'
+                  AND transactiondate like '2017%%'
     """
     return pd.read_sql(query, get_connection('zillow'))
+
 '''
 *------------------*
 |                  |
@@ -68,6 +72,7 @@ def zillow17():
 |                  |
 *------------------*
 '''
+
 def drop_based_on_pct(df, pc, pr):
     """
     drop_based_on_pct takes in: 
@@ -81,6 +86,7 @@ def drop_based_on_pct(df, pc, pr):
     df.dropna(axis = 1, thresh = tpc * len(df.index), inplace = True)
     df.dropna(axis = 0, thresh = tpr * len(df.columns), inplace = True)
     return df
+
 def outlier(df, feature, m):
     '''
     outlier will take in a dataframe's feature:
@@ -96,6 +102,7 @@ def outlier(df, feature, m):
     upper_bound = q3 + (multiplier * iqr)
     lower_bound = q1 - (multiplier * iqr)
     return upper_bound, lower_bound
+
 def wrangle_zillow():
     """
     wrangle_zillow will:
