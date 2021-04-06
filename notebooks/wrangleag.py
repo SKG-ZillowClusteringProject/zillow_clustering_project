@@ -201,7 +201,7 @@ def clean_zillow(df):
                    "regionidzip": "zip_code",
                    "landtaxvaluedollarcnt": "land_value",
                    "structuretaxvaluedollarcnt": "structure_value",
-                   "taxvaluedollarcnt ": "home_value"
+                   "taxvaluedollarcnt": "home_value"
                   }, inplace=True)
     
 
@@ -223,12 +223,12 @@ def split_zillow(df):
     
     perform a train, validate, test split
     
-    return: the three split pandas dataframes-train/validate/test
+    return: the three split pandas dataframes-train/validate/test & df
     """  
     
     train_validate, test = train_test_split(df, test_size=0.2, random_state=3210)
     train, validate = train_test_split(train_validate, train_size=0.7, random_state=3210)
-    return train, validate, test
+    return df, train, validate, test
 
 
 
@@ -249,28 +249,67 @@ def wrangle_zillow():
 
 
 
-def scale_zillow(train, validate, test):
+def features_target_split(df, target):
     '''
-    scale_zillow will 
-    - fits a min-max scaler to the train split
-    - transforms all three spits using that scaler. 
-    returns: 3 dataframes with the same column names and scaled values. 
+    splits each of the 3 samples into a dataframe with independent variables
+    and a series with the dependent, or target variable. 
+    The function returns 3 dataframes and 3 series:
+    X_train (df) & y_train (series), X_validate & y_validate, X_test & y_test. 
     '''
+    # Split with X and y
+    X_train = train.drop(columns=[target])
+    y_train = train[target]
+    X_validate = validate.drop(columns=[target])
+    y_validate = validate[target]
+    X_test = test.drop(columns=[target])
+    y_test = test[target]
     
-    scaler = sklearn.preprocessing.MinMaxScaler()
-    
-    # Note that we only call .fit with the TRAINING data,
-    scaler.fit(train)
-    
-    # but we use .transform to apply the scaling to all the data splits.    
-    train_scaled = scaler.transform(train)
-    validate_scaled = scaler.transform(validate)
-    test_scaled = scaler.transform(test)
-    
-    # convert to arrays to pandas DFs
-    train_scaled = pd.DataFrame(train_scaled, columns=train.columns)
-    validate_scaled = pd.DataFrame(validate_scaled, columns=train.columns)
-    test_scaled = pd.DataFrame(test_scaled, columns=train.columns)
-    
-    return train_scaled, validate_scaled, test_scaled
+    return X_train, y_train, X_validate, y_validate, X_test, y_test  
 
+
+
+
+
+def get_object_cols(df):
+    '''
+    This function takes in a dataframe and identifies the columns that are object types
+    and returns a list of those column names. 
+    '''
+    # create a mask of columns whether they are object type or not
+    mask = np.array((df.dtypes == "object") | (df.dtypes == "category"))
+
+        
+    # get a list of the column names that are objects (from the mask)
+    object_cols = df.iloc[:, mask].columns.tolist()
+    
+    return object_cols
+
+
+
+
+
+def get_numeric_X_cols(train, object_cols):
+    '''
+    takes in a dataframe and list of object column names
+    and returns a list of all other columns names, the non-objects. 
+    '''
+    numeric_cols = [col for col in train.columns.values if col not in object_cols]
+    
+    return numeric_cols
+
+
+
+
+
+def Standard_Scaler(X_train, X_validate, X_test):
+    """
+    Takes in X_train, X_validate and X_test dfs with numeric values only
+    Returns scaler, X_train_scaled, X_validate_scaled, X_test_scaled dfs
+    """
+    scaler = sklearn.preprocessing.StandardScaler().fit(X_train[numeric_cols])
+    
+    X_train_scaled = pd.DataFrame(scaler.transform(X_train[numeric_cols]), index = X_train.index, columns = numeric_cols)
+    X_validate_scaled = pd.DataFrame(scaler.transform(X_validate[numeric_cols]), index = X_validate.index, columns = numeric_cols)
+    X_test_scaled = pd.DataFrame(scaler.transform(X_test[numeric_cols]), index = X_test.index, columns = numeric_cols)
+                                 
+    return scaler, X_train_scaled, X_validate_scaled, X_test_scaled
