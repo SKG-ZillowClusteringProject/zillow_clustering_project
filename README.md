@@ -14,7 +14,7 @@ ___
 
 ___
 
-<a name="scenario"></a><h1><img src="sbar.png"/></h1>
+<a name="scenario"></a><h1><img src="https://i.pinimg.com/originals/cd/51/c7/cd51c7eb324f7092a391c2e6a9e08b2b.png"/></h1>
 
 Selling homes in our new normal has just gotten easier with Zillow Offers®. Now home owners can hand over the burden of selling their property, by selling directly to us based on our state of the art Zestimate score.
 
@@ -24,7 +24,7 @@ The accuracy and itegrity of our Zestimate score is of high importance. As a jun
 
 [Jump to Navigation](#navigation)
 
-<a name="project-planning"></a><h1><img src="ppbar.png"/></h1>
+<a name="project-planning"></a><h1><img src="https://i.pinimg.com/originals/08/5a/eb/085aeb8e6c5addd4114c7ecc12166145.png"/></h1>
 
 ### Goal: 
 The goal for this project is to create a model that will accurately predict the Zestimate’s `logerror`. By doing so, we will uncover what features available on the Zillow Dataset are driving the amount of error.
@@ -66,22 +66,22 @@ The goal for this project is to create a model that will accurately predict the 
     
 [Jump to Navigation](#navigation)
 
-<a name="key-findings"></a><h1><img src="kfbar.png"/></h1>
+<a name="key-findings"></a><h1><img src="https://i.pinimg.com/originals/82/02/e8/8202e8d3a1cfda0a8d828ea688b6b36e.png"/></h1>
 
 
 [Jump to Navigation](#navigation)
 
-<a name="tested-hypotheses"></a><h1><img src="thbar.png"/></h1>
+<a name="tested-hypotheses"></a><h1><img src="https://i.pinimg.com/originals/f8/6c/1f/f86c1fc26068ad184455e11c7c5858cc.png"/></h1>
 
     
 [Jump to Navigation](#navigation)
 
-<a name="take-aways"></a><h1><img src="tabar.png"/></h1>
+<a name="take-aways"></a><h1><img src="https://i.pinimg.com/originals/0b/24/91/0b2491f3c35b30155defee2f5ee6c3c3.png"/></h1>
 
 
 [Jump to Navigation](#navigation)
 
-<a name="data-dictionary"></a><h1><img src="ddbar.png"/></h1>
+<a name="data-dictionary"></a><h1><img src="https://i.pinimg.com/originals/2f/d4/c1/2fd4c1a67997f7c7c32b556aefd7ce1a.png"/></h1>
 
 | column_name              | description                                                                                                         | key | dtype    |
 |--------------------------|---------------------------------------------------------------------------------------------------------------------|-----|----------|
