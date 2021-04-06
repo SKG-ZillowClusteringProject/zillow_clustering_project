@@ -35,15 +35,22 @@
 # Prepare
 <div class="alert alert-block alert-success">
 <b>Prepare Summary:</b> 
-<br>-  <b>Dropped columns: </b> <br>'id', 'airconditioningtypeid', 'architecturalstyletypeid','basementsqft', 'buildingclasstypeid', 'calculatedbathnbr', 'decktypeid',
-'finishedfloor1squarefeet','finishedsquarefeet12', 'finishedsquarefeet13', 'finishedsquarefeet15','finishedsquarefeet50', 'finishedsquarefeet6', fireplacecnt',
-'fullbathcnt', 'garagecarcnt', 'garagetotalsqft', 'hashottuborspa',
-'heatingorsystemtypeid', 'poolcnt', 'poolsizesum', 'pooltypeid10', 'pooltypeid2', 'pooltypeid7','propertycountylandusecode', 'propertylandusetypeid',
-'propertyzoningdesc','storytypeid', 'threequarterbathnbr', 'typeconstructiontypeid',
-'unitcnt', 'yardbuildingsqft17', 'yardbuildingsqft26', 'numberofstories', 'fireplaceflag', 'taxdelinquencyflag', 'taxdelinquencyyear', 'airconditioningdesc', 'architecturalstyledesc', 'buildingclassdesc','heatingorsystemdesc', 'propertylandusedesc', 'storydesc','typeconstructiondesc'</b> 
+<br>-  <b>Dropped: </b> <br>
+- 45 columns and 4323 rows</b> 
 <br>- <b>Why drop ?! </b> 
 <br>We dropped columns that had > 60% of nulls and dropped rows that had 70% of nulls because we could not gather the missing information from other variables or impute the missing values without high skew.  We also dropped columns that contained redundant information and dropped columns that contained information we would not be using in our models.
-<br>-   
+<br>- <b>Outliers: </b> <br>
+- We handled outliers in taxvaluedollarcnt by dropping values > $5 million
+<br>- We handled outliers in calculatedfinishedsquarefeet by dropping values < 500 sqft and > 12500 sqft
+<br>- <b>Remaining missing values:</b> <br>
+- lotsizesquarefeet missing values were filled with median
+<br>- buildingqualitytypeid missing values were filled with median
+<br>- remaining missing values were dropped
+<br>- <b>Renamed columns: </b> <br>
+- 9 columns renamed to accurately represent the data they contain.
+<br>- Ex). calculatedfinishedsquarefeet to sqft 
+<br>- <b>New features: </b> <br>
+- home_age, county, logerror_quartiles
 </div>
 
 # Explore 
