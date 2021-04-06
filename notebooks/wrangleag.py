@@ -68,7 +68,7 @@ def zillow17():
             LEFT JOIN typeconstructiontype construct USING (typeconstructiontypeid)
             WHERE prop.latitude IS NOT NULL
                   AND prop.longitude IS NOT NULL
-                  AND transactiondate like '2017%'
+                  AND transactiondate like '2017%%'
     """
     
     return pd.read_sql(query, get_connection('zillow'))
