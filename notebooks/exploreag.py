@@ -238,3 +238,7 @@ def plot_scatter(train, categorical_target, continuous_target, quant_var):
     p = plt.title(quant_var)
     return p
 
+
+
+
+
