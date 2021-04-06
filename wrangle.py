@@ -165,7 +165,8 @@ def clean_zillow(df):
                   'fullbathcnt', 'heatingorsystemtypeid', 
                   'propertycountylandusecode', 'propertylandusetypeid', 
                   'propertyzoningdesc', 'censustractandblock', 'propertylandusedesc', 
-                  'heatingorsystemdesc', 'assessmentyear', 'regionidcounty' ],axis=1)
+                  'heatingorsystemdesc', 'assessmentyear', 'regionidcounty',
+                 'rawcensustractandblock', 'regionidcity', 'regionidzip', 'roomcnt', 'unitcnt', 'transactiondate'],axis=1)
     
     # Replace nulls in unitcnt with 1
     df.unitcnt.fillna(1, inplace = True)
@@ -198,7 +199,6 @@ def clean_zillow(df):
                    "buildingqualitytypeid": "property_quality", 
                    "calculatedfinishedsquarefeet": "sqft",
                    "lotsizesquarefeet": "lot_sqft",
-                   "regionidzip": "zip_code",
                    "landtaxvaluedollarcnt": "land_value",
                    "structuretaxvaluedollarcnt": "structure_value",
                    "taxvaluedollarcnt": "home_value"
