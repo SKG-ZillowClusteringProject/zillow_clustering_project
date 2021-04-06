@@ -119,7 +119,7 @@ The goal for this project is to create a model that will accurately predict the 
     
 [Jump to Navigation](#navigation)
 
-<a name="workflow"></a><h1><img src="wbar.png"/></h1>
+<a name="workflow"></a><h1><img src="https://i.pinimg.com/originals/96/13/36/961336fdcedb8a6025a978410e0d14b3.png"/></h1>
 
     
 Please pull the repo first to use the following links to guide you through the data science pipeline. Enjoy!
