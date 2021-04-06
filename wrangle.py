@@ -189,7 +189,7 @@ def wrangle_zillow():
                    "regionidzip": "zip_code",
                    "landtaxvaluedollarcnt": "land_value",
                    "structuretaxvaluedollarcnt": "structure_value",
-                   "taxvaluedollarcnt ": "home_value"
+                   "taxvaluedollarcnt": "home_value"
                   }, inplace=True)
     
 
