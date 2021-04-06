@@ -26,3 +26,7 @@ feature engineer:
     - young_avghome
     - veteran_avghome
     - lghome
+    
+There is a relationship between home_age and logerror 
+There is a relationship between lotsize and logerror
+There is a relationship between home_value and logerror
