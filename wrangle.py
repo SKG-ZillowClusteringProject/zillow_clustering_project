@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 import os
@@ -24,6 +23,9 @@ def get_connection(db, user=user, host=host, password=password):
     '''
     
     return f'mysql+pymysql://{user}:{password}@{host}/{db}'
+
+
+
 
 
 def zillow17():
@@ -67,7 +69,7 @@ def zillow17():
             WHERE prop.latitude IS NOT NULL
                   AND prop.longitude IS NOT NULL
                   AND transactiondate like '2017%%'
-            """
+    """
     
     return pd.read_sql(query, get_connection('zillow'))
 
@@ -123,14 +125,23 @@ def outlier(df, feature, m):
 
 
     
-def wrangle_zillow():
+def clean_zillow(df):
     """
-    wrangle_zillow will:
-    - read in zillow.csv acquired from SQL query
-    - filter data to single unit homes with min 1B/1B 
+    clean_zillow will:
+    - read in df acquired from SQL query
+    - filter data to single unit homes with min 1B/1B over 500 sqft
+    - drop columns with 40%+ & rows 30%+ null
+    - add a column for county names
+    - drop unnecessary columns
+    - fills in unitcnt/lotsizesquarefeet/buildingqualitytypeid nulls
+    - drops remaining nulls
+    - removes extreme outliers for home_value & sqft
+    - adds a home_age & log_quartiles column
+    - converts certain float columns to int
+    - renames certain columns
     """
     
-    df = pd.read_csv('zillow.csv')
+    #df = pd.read_csv('zillow.csv')
     df = df.set_index("parcelid")
     
     # Restrict df to only properties that meet single-use criteria
@@ -150,10 +161,11 @@ def wrangle_zillow():
                                    'Ventura'))
     
     # Drop unnecessary/redundant columns
-    df = df.drop(['id',
-       'calculatedbathnbr', 'finishedsquarefeet12', 'fullbathcnt', 'heatingorsystemtypeid'
-       ,'propertycountylandusecode', 'propertylandusetypeid','propertyzoningdesc',
-        'censustractandblock', 'propertylandusedesc', 'heatingorsystemdesc'],axis=1)
+    df = df.drop(['id', 'calculatedbathnbr', 'finishedsquarefeet12', 
+                  'fullbathcnt', 'heatingorsystemtypeid', 
+                  'propertycountylandusecode', 'propertylandusetypeid', 
+                  'propertyzoningdesc', 'censustractandblock', 'propertylandusedesc', 
+                  'heatingorsystemdesc', 'assessmentyear', 'regionidcounty' ],axis=1)
     
     # Replace nulls in unitcnt with 1
     df.unitcnt.fillna(1, inplace = True)
@@ -173,8 +185,8 @@ def wrangle_zillow():
     df['home_age'] = 2021 - df.yearbuilt
     
     # List of cols to convert to 'int'
-    cols = ['fips', 'buildingqualitytypeid', 'bedroomcnt', 'roomcnt', 
-            'home_age', 'yearbuilt', 'assessmentyear', 'regionidcounty', 
+    cols = ['fips', 'buildingqualitytypeid', 'bedroomcnt', 
+            'roomcnt', 'home_age', 'yearbuilt', 
             'regionidzip', 'unitcnt', 'home_age']
     # loop through cols list in conversion
     for col in cols:
@@ -198,3 +210,106 @@ def wrangle_zillow():
     
     
     return df
+
+
+
+
+
+def split_zillow(df):
+    """
+    split_zillow will take one argument(df) and 
+    then split our data into 20/80, 
+    then split the 80% into 30/70
+    
+    perform a train, validate, test split
+    
+    return: the three split pandas dataframes-train/validate/test & df
+    """  
+    
+    train_validate, test = train_test_split(df, test_size=0.2, random_state=3210)
+    train, validate = train_test_split(train_validate, train_size=0.7, random_state=3210)
+    return df, train, validate, test
+
+
+
+
+
+def wrangle_zillow():
+    '''
+    wrangle_zillow will: 
+    - read in zillow dataset for transaction dates between 05/2017-08/2017 as a pandas DataFrame,
+    - clean the data
+    - split the data
+    return: the three split pandas dataframes-train/validate/test
+    '''
+    
+    df = clean_zillow(zillow17())
+    return split_zillow(df)
+
+
+
+
+def features_target_split(df, target):
+    '''
+    splits each of the 3 samples into a dataframe with independent variables
+    and a series with the dependent, or target variable. 
+    The function returns 3 dataframes and 3 series:
+    X_train (df) & y_train (series), X_validate & y_validate, X_test & y_test. 
+    '''
+    # Split with X and y
+    X_train = train.drop(columns=[target])
+    y_train = train[target]
+    X_validate = validate.drop(columns=[target])
+    y_validate = validate[target]
+    X_test = test.drop(columns=[target])
+    y_test = test[target]
+    
+    return X_train, y_train, X_validate, y_validate, X_test, y_test  
+
+
+
+
+
+def get_object_cols(df):
+    '''
+    This function takes in a dataframe and identifies the columns that are object types
+    and returns a list of those column names. 
+    '''
+    # create a mask of columns whether they are object type or not
+    mask = np.array((df.dtypes == "object") | (df.dtypes == "category"))
+
+        
+    # get a list of the column names that are objects (from the mask)
+    object_cols = df.iloc[:, mask].columns.tolist()
+    
+    return object_cols
+
+
+
+
+
+def get_numeric_X_cols(train, object_cols):
+    '''
+    takes in a dataframe and list of object column names
+    and returns a list of all other columns names, the non-objects. 
+    '''
+    numeric_cols = [col for col in train.columns.values if col not in object_cols]
+    
+    return numeric_cols
+
+
+
+
+
+def Standard_Scaler(X_train, X_validate, X_test):
+    """
+    Takes in X_train, X_validate and X_test dfs with numeric values only
+    Returns scaler, X_train_scaled, X_validate_scaled, X_test_scaled dfs
+    """
+    scaler = sklearn.preprocessing.StandardScaler().fit(X_train[numeric_cols])
+    
+    X_train_scaled = pd.DataFrame(scaler.transform(X_train[numeric_cols]), index = X_train.index, columns = numeric_cols)
+    X_validate_scaled = pd.DataFrame(scaler.transform(X_validate[numeric_cols]), index = X_validate.index, columns = numeric_cols)
+    X_test_scaled = pd.DataFrame(scaler.transform(X_test[numeric_cols]), index = X_test.index, columns = numeric_cols)
+                                 
+    return scaler, X_train_scaled, X_validate_scaled, X_test_scaled
