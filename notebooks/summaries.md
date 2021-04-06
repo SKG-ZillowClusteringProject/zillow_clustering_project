@@ -27,16 +27,25 @@
 # Acquire
 <div class="alert alert-block alert-success">
 <b>Acquire Summary:</b> 
-- The get_connection() function from wrangle module acquires zillow dataset from Codeup database using Sequel Pro.
-- The zillow17() function creates a query that joins the 2017 properties and predictions data and filters data for single unit/single family homes.
-- The original, unprepared data set has 77574 rows and 68 columns.
+<br>- The get_connection() function from wrangle module acquires zillow dataset from Codeup database using Sequel Pro.
+<br>- The zillow17() function creates a query that joins the 2017 properties and predictions data and filters data for single unit/single family homes.
+<br>- The original, unprepared data set has 77574 rows and 68 columns.
 </div>
 
 # Prepare
+<div class="alert alert-block alert-success">
 <b>Prepare Summary:</b> 
-- <b>Dropped columns: </b> 
-- 
+<br>-  <b>Dropped columns: </b> <br>'id', 'airconditioningtypeid', 'architecturalstyletypeid','basementsqft', 'buildingclasstypeid', 'calculatedbathnbr', 'decktypeid',
+'finishedfloor1squarefeet','finishedsquarefeet12', 'finishedsquarefeet13', 'finishedsquarefeet15','finishedsquarefeet50', 'finishedsquarefeet6', fireplacecnt',
+'fullbathcnt', 'garagecarcnt', 'garagetotalsqft', 'hashottuborspa',
+'heatingorsystemtypeid', 'poolcnt', 'poolsizesum', 'pooltypeid10', 'pooltypeid2', 'pooltypeid7','propertycountylandusecode', 'propertylandusetypeid',
+'propertyzoningdesc','storytypeid', 'threequarterbathnbr', 'typeconstructiontypeid',
+'unitcnt', 'yardbuildingsqft17', 'yardbuildingsqft26', 'numberofstories', 'fireplaceflag', 'taxdelinquencyflag', 'taxdelinquencyyear', 'airconditioningdesc', 'architecturalstyledesc', 'buildingclassdesc','heatingorsystemdesc', 'propertylandusedesc', 'storydesc','typeconstructiondesc'</b> 
+<br>- <b>Why drop ?! </b> 
+<br>We dropped columns that had > 60% of nulls and dropped rows that had 70% of nulls because we could not gather the missing information from other variables or impute the missing values without high skew.  We also dropped columns that contained redundant information and dropped columns that contained information we would not be using in our models.
+<br>-   
 </div>
+
 # Explore 
 
 # Model
