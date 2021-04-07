@@ -18,7 +18,7 @@ ___
 
 Selling homes in our new normal has just gotten easier with Zillow Offers®. Now home owners can hand over the burden of selling their property, by selling directly to us based on our state of the art Zestimate score.
 
-The accuracy and itegrity of our Zestimate score is of high importance. As a junior data scientists on the Zillow data science team, we are tasked with uncovering what drivers most affect the validity of the Zestimate score. This is measured by our target variable: `logerror`. Which is the difference between Zillow's estimated Zestimate and actual sale price. 
+The accuracy and integrity of our Zestimate score is of high importance. As a junior data scientists on the Zillow data science team, we are tasked with uncovering what drivers most affect the validity of the Zestimate score. This is measured by our target variable: `logerror`. Which is the difference between Zillow's estimated Zestimate and actual sale price. 
 >`logerror` = log (Zestimate) − log (ActualSalePrice)
 
 
@@ -59,7 +59,8 @@ An MVP; the easiest thing at each stage to move forward. Remember the MVP won't 
     - property_age_bin 
 
 **Deliverables:**
-
+- Final clean, interactive Py notebook
+- 
     
     
 [Jump to Navigation](#navigation)
@@ -230,17 +231,17 @@ The following features appear to have clusters to explore:
     
 Please pull the repo first to use the following links to guide you through the data science pipeline. Enjoy!
 
-1. [Prep Your Repo](#prep-your-repo)
-1. [Import](#import)
-1. [Acquire Data](#acquire-data)
-1. [Clean, Prep & Split Data](#clean-prep-and-split-data)
-1. [Explore Data](#explore-data)
-    - [Hypothesis Testing](#hypothesis-testing)
-1. [Evaluate Data](#evaluate-data)
-1. [Modeling](#modeling)
-    - [Identify Baseline](#identify-baseline)
-    - [Train / Validate](#train-validate)
-    - [Test](#test)
+1. [Prep Your Repo](SKG_Final_Notebook.ipynb#prep-your-repo)
+1. [Import](SKG_Final_Notebook.ipynb#import)
+1. [Acquire Data](SKG_Final_Notebook.ipynb#acquire-data)
+1. [Clean, Prep & Split Data](SKG_Final_Notebook.ipynb#clean-prep-and-split-data)
+1. [Explore Data](SKG_Final_Notebook.ipynb#explore-data)
+    - [Hypothesis Testing](SKG_Final_Notebook.ipynb#hypothesis-testing)
+1. [Evaluate Data](SKG_Final_Notebook.ipynb#evaluate-data)
+1. [Modeling](SKG_Final_Notebook.ipynb#modeling)
+    - [Identify Baseline](SKG_Final_Notebook.ipynb#identify-baseline)
+    - [Train / Validate](SKG_Final_Notebook.ipynb#train-validate)
+    - [Test](SKG_Final_Notebook.ipynb#test)
 
 
 
