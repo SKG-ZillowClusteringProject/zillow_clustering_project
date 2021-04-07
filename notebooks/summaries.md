@@ -85,3 +85,10 @@
 <b>Statitical Tests (logerror vs counties):</b> 
 <br>-T-tests were conducted to see if logerror was significantly different between the counties.  
 <br>-We found there was a significant difference in logerror between LA and Orange County, but not between LA and Ventura county or Orange and Ventura County.  </div>
+
+# Feature Importance 
+<div class="alert alert-block alert-success">
+<b>Feature Engineering :</b> 
+<br>- Recursive feature elimination was used to determine the top 10 features to be used for each set of clusters.
+<br>- A few of our engineered features made the top 10!
+<br>- Out of our homemade features, small homes of all ages , large homes, and homes that are considered "best quality" seem to be drivers of logerror. </div> 
