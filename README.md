@@ -153,9 +153,11 @@ The following features appear to have clusters to explore:
 
 <a name="take-aways"></a><h1><img src="https://i.pinimg.com/originals/0b/24/91/0b2491f3c35b30155defee2f5ee6c3c3.png"/></h1>
 
-> home_age and logerror had no more than a weak linear relationship
-> lot_sqft did not have a significant effect on logerror, which we found surprising
-> also surprising was the apparent lack of significance between home_value and logerror
+> `home_age` and `logerror` had a weak linear relationship, at best
+>
+> `lot_sqft` did not have a significant effect on `logerror`, which we found surprising
+>
+> also surprising was the apparent lack of significance between `home_value` and `logerror`
 
 
 [Jump to Navigation](#navigation)
