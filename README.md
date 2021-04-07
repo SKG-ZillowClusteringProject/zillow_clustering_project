@@ -231,16 +231,16 @@ The following features appear to have clusters to explore:
     
 Please pull the repo first to use the following links to guide you through the data science pipeline. Enjoy!
 
-1. [Prep Your Repo](SKG_Final_Notebook.ipynb#prep-your-repo)
-1. [Import](SKG_Final_Notebook.ipynb#import)
-1. [Acquire Data](SKG_Final_Notebook.ipynb#acquire-data)
-1. [Clean, Prep & Split Data](SKG_Final_Notebook.ipynb#clean-prep-and-split-data)
-1. [Explore Data](SKG_Final_Notebook.ipynb#explore-data)
-    - [Hypothesis Testing](SKG_Final_Notebook.ipynb#hypothesis-testing)
-1. [Evaluate Data](SKG_Final_Notebook.ipynb#evaluate-data)
-1. [Modeling](SKG_Final_Notebook.ipynb#modeling)
-    - [Identify Baseline](SKG_Final_Notebook.ipynb#identify-baseline)
-    - [Train / Validate](SKG_Final_Notebook.ipynb#train-validate)
+1. [Prep Your Repo](SKG-ZillowClusteringProject/SKG_Final_Notebook.ipynb#prep-your-repo)
+1. [Import](SKG-ZillowClusteringProject/SKG_Final_Notebook.ipynb#import)
+1. [Acquire Data](SKG-ZillowClusteringProject/SKG_Final_Notebook.ipynb#acquire-data)
+1. [Clean, Prep & Split Data](SKG-ZillowClusteringProject/SKG_Final_Notebook.ipynb#clean-prep-and-split-data)
+1. [Explore Data](SKG-ZillowClusteringProject/SKG_Final_Notebook.ipynb#explore-data)
+    - [Hypothesis Testing](SKG-ZillowClusteringProject/SKG_Final_Notebook.ipynb#hypothesis-testing)
+1. [Evaluate Data](SKG-ZillowClusteringProject/SKG_Final_Notebook.ipynb#evaluate-data)
+1. [Modeling](SKG-ZillowClusteringProject/SKG_Final_Notebook.ipynb#modeling)
+    - [Identify Baseline](SKG-ZillowClusteringProject/SKG_Final_Notebook.ipynb#identify-baseline)
+    - [Train / Validate](SKG-ZillowClusteringProject/SKG_Final_Notebook.ipynb#train-validate)
     - [Test](SKG_Final_Notebook.ipynb#test)
 
 
