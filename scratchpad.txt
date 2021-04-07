@@ -276,3 +276,15 @@ def wrangle_zillow():
     
     
     return df
+
+############################## check current version ###################################
+
+import matplotlib
+import sklearn
+
+print('Versions')
+print('Pandas:', pd.__version__)
+print('Numpy:', np.__version__)
+print('Matplotlib:', matplotlib.__version__)
+print('Seaborn:', sns.__version__)
+print('Scikit-Learn:', sklearn.__version__)

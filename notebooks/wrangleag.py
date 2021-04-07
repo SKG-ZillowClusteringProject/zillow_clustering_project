@@ -141,7 +141,7 @@ def clean_zillow(df):
     - renames certain columns
     """
     
-    #df = pd.read_csv('zillow.csv')
+    df = pd.read_csv('zillow.csv')
     df = df.set_index("parcelid")
     
     # Restrict df to only properties that meet single-use criteria
