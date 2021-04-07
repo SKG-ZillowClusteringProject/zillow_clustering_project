@@ -160,6 +160,8 @@ The following features appear to have clusters to explore:
 >
 > - also surprising was the apparent lack of significance between `home_value` and `logerror`
 
+- Out of our homemade features, small homes of all ages , large homes, and homes that are considered "best quality" seem to be drivers of logerror.
+
 
 [Jump to Navigation](#navigation)
 
