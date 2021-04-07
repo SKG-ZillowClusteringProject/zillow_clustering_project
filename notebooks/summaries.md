@@ -51,8 +51,44 @@
 <br>- Ex). calculatedfinishedsquarefeet to sqft 
 <br>- <b>New features: </b> <br>
 - home_age, county, logerror_quartiles
+<br>-<b>Split:</b>
+<br>
 </div>
 
 # Explore 
 
 # Model
+<div class="alert alert-block alert-success">
+<b>Model Summary (home_age vs property_quality):</b> 
+<br>-<b>Baseline to beat: </b> 
+<br>-Train/In-Sample:  <b>0.164457 </b>
+<br>-Validate/Out-of-Sample: <b>0.171031 </b>  
+<br>-<b>LinearRegression: </b> <br>
+- Training/In-Sample: <b>0.164136</b>
+<br>- Validation/Out-of-Sample: <b>0.170807</b>
+<br>- Linear Regression OLS beats the baseline in-sample by <b>0.0003 </b>
+<br>- Linear Regression OLS beats the baseline out-of-sample by <b>0.0002</b>  
+<br>-<b>Polynomial Regression (2 Degrees):</b> <br> 
+- Polynomial Regression beats the baseline in-sample by <b>0.0006 </b>
+<br>- Polynomial Regression failed to beat the baseline out-of-sample  
+<br>-<b>Polynomial Regression (3 Degrees and 4 Degrees):</b> <br>
+- Both models failed to beat baseline in sample and out of sample.
+</div>
+
+# Test
+<div class="alert alert-block alert-success">
+<b>Test our best (home_age x property_quality):</b> 
+<br>- <b> LinearRegression</b> Test/Out-of-Sample Performance beats baseline by <b>0.01</b></div>
+
+# Stats Test Summary
+<div class="alert alert-block alert-success">
+<b>Statitical Tests (logerror vs counties):</b> 
+<br>-T-tests were conducted to see if logerror was significantly different between the counties.  
+<br>-We found there was a significant difference in logerror between LA and Orange County, but not between LA and Ventura county or Orange and Ventura County.  </div>
+
+# Feature Importance 
+<div class="alert alert-block alert-success">
+<b>Feature Engineering :</b> 
+<br>- Recursive feature elimination was used to determine the top 10 features to be used for each set of clusters.
+<br>- A few of our engineered features made the top 10!
+<br>- Out of our homemade features, small homes of all ages , large homes, and homes that are considered "best quality" seem to be drivers of logerror. </div> 

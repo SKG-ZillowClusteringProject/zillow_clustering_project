@@ -168,8 +168,6 @@ def clean_zillow(df):
                   'propertyzoningdesc', 'censustractandblock', 'propertylandusedesc', 
                   'heatingorsystemdesc', 'assessmentyear', 'regionidcounty' ],axis=1)
     
-    # Replace nulls in unitcnt with 1
-    df.unitcnt.fillna(1, inplace = True)
     
     # Replace nulls with median values for select columns
     df.lotsizesquarefeet.fillna(7265, inplace = True)
@@ -187,8 +185,7 @@ def clean_zillow(df):
     
     # List of cols to convert to 'int'
     cols = ['fips', 'buildingqualitytypeid', 'bedroomcnt', 
-            'roomcnt', 'home_age', 'yearbuilt', 
-            'regionidzip', 'unitcnt', 'home_age']
+            'home_age', 'yearbuilt']
     # loop through cols list in conversion
     for col in cols:
         df[col] = df[col].astype('int')
@@ -239,7 +236,7 @@ def split_zillow(df):
 def wrangle_zillow():
     '''
     wrangle_zillow will: 
-    - read in zillow dataset for transaction dates between 05/2017-08/2017 as a pandas DataFrame,
+    - read in zillow dataset for transaction dates between 01/2017-12/2017 as a pandas DataFrame,
     - clean the data
     - split the data
     return: the three split pandas dataframes-train/validate/test
@@ -247,6 +244,8 @@ def wrangle_zillow():
     
     df = clean_zillow(zillow17())
     return split_zillow(df)
+
+
 
 
 
@@ -275,6 +274,7 @@ def train_validate_test_split(df, target, seed):
 
 
 
+
 def get_object_cols(df):
     '''
     This function takes in a dataframe and identifies the columns that are object types
@@ -290,9 +290,6 @@ def get_object_cols(df):
     return object_cols
 
 
-
-
-
 def get_numeric_X_cols(train, object_cols):
     '''
     takes in a dataframe and list of object column names
@@ -303,7 +300,22 @@ def get_numeric_X_cols(train, object_cols):
     return numeric_cols
 
 
-
+def features_target_split(df, target):
+    '''
+    splits each of the 3 samples into a dataframe with independent variables
+    and a series with the dependent, or target variable. 
+    The function returns 3 dataframes and 3 series:
+    X_train (df) & y_train (series), X_validate & y_validate, X_test & y_test. 
+    '''
+    # Split with X and y
+    X_train = train.drop(columns=[target])
+    y_train = train[target]
+    X_validate = validate.drop(columns=[target])
+    y_validate = validate[target]
+    X_test = test.drop(columns=[target])
+    y_test = test[target]
+    
+    return X_train, y_train, X_validate, y_validate, X_test, y_test  
 
 
 def Standard_Scaler(X_train, X_validate, X_test):
@@ -311,10 +323,17 @@ def Standard_Scaler(X_train, X_validate, X_test):
     Takes in X_train, X_validate and X_test dfs with numeric values only
     Returns scaler, X_train_scaled, X_validate_scaled, X_test_scaled dfs
     """
-    scaler = sklearn.preprocessing.StandardScaler().fit(X_train[numeric_cols])
+    scaler = sklearn.preprocessing.StandardScaler().fit(X_train['bathrooms',
+ 'bedrooms', 'property_quality', 'sqft','fips','latitude','longitude', 'lot_sqft','yearbuilt', 'structure_value','home_value','land_value', 'taxamount','county','home_age'])
     
-    X_train_scaled = pd.DataFrame(scaler.transform(X_train[numeric_cols]), index = X_train.index, columns = numeric_cols)
-    X_validate_scaled = pd.DataFrame(scaler.transform(X_validate[numeric_cols]), index = X_validate.index, columns = numeric_cols)
-    X_test_scaled = pd.DataFrame(scaler.transform(X_test[numeric_cols]), index = X_test.index, columns = numeric_cols)
+    X_train_scaled = pd.DataFrame(scaler.transform(X_train['bathrooms',
+ 'bedrooms', 'property_quality', 'sqft','fips','latitude','longitude', 'lot_sqft','yearbuilt', 'structure_value','home_value','land_value', 'taxamount','county','home_age']), index = X_train.index, columns = ['bathrooms',
+ 'bedrooms', 'property_quality', 'sqft','fips','latitude','longitude', 'lot_sqft','yearbuilt', 'structure_value','home_value','land_value', 'taxamount','county','home_age'])
+    X_validate_scaled = pd.DataFrame(scaler.transform(X_validate['bathrooms',
+ 'bedrooms', 'property_quality', 'sqft','fips','latitude','longitude', 'lot_sqft','yearbuilt', 'structure_value','home_value','land_value', 'taxamount','county','home_age']), index = X_validate.index, columns = ['bathrooms',
+ 'bedrooms', 'property_quality', 'sqft','fips','latitude','longitude', 'lot_sqft','yearbuilt', 'structure_value','home_value','land_value', 'taxamount','county','home_age'])
+    X_test_scaled = pd.DataFrame(scaler.transform(X_test['bathrooms',
+ 'bedrooms', 'property_quality', 'sqft','fips','latitude','longitude', 'lot_sqft','yearbuilt', 'structure_value','home_value','land_value', 'taxamount','county','home_age']), index = X_test.index, columns = ['bathrooms',
+ 'bedrooms', 'property_quality', 'sqft','fips','latitude','longitude', 'lot_sqft','yearbuilt', 'structure_value','home_value','land_value', 'taxamount','county','home_age'])
                                  
     return scaler, X_train_scaled, X_validate_scaled, X_test_scaled

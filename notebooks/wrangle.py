@@ -138,7 +138,7 @@ def wrangle_zillow():
     - renames certain columns
     """
     
-    #df = pd.read_csv('zillow.csv')
+    df = pd.read_csv('zillow.csv')
     df = df.set_index("parcelid")
     
     # Restrict df to only properties that meet single-use criteria
@@ -198,7 +198,7 @@ def wrangle_zillow():
                    "regionidzip": "zip_code",
                    "landtaxvaluedollarcnt": "land_value",
                    "structuretaxvaluedollarcnt": "structure_value",
-                   "taxvaluedollarcnt ": "home_value"
+                   "taxvaluedollarcnt": "home_value"
                   }, inplace=True)
     
 
