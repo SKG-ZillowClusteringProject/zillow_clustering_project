@@ -125,6 +125,7 @@ def outlier(df, feature, m):
 
 
     
+    
 def clean_zillow(df):
     """
     clean_zillow will:
@@ -165,8 +166,7 @@ def clean_zillow(df):
                   'fullbathcnt', 'heatingorsystemtypeid', 
                   'propertycountylandusecode', 'propertylandusetypeid', 
                   'propertyzoningdesc', 'censustractandblock', 'propertylandusedesc', 
-                  'heatingorsystemdesc', 'assessmentyear', 'regionidcounty',
-                 'rawcensustractandblock', 'regionidcity', 'regionidzip', 'roomcnt', 'unitcnt', 'transactiondate'],axis=1)
+                  'heatingorsystemdesc', 'assessmentyear', 'regionidcounty' ],axis=1)
     
     
     # Replace nulls with median values for select columns
@@ -196,6 +196,7 @@ def clean_zillow(df):
                    "buildingqualitytypeid": "property_quality", 
                    "calculatedfinishedsquarefeet": "sqft",
                    "lotsizesquarefeet": "lot_sqft",
+                   "regionidzip": "zip_code",
                    "landtaxvaluedollarcnt": "land_value",
                    "structuretaxvaluedollarcnt": "structure_value",
                    "taxvaluedollarcnt": "home_value"
@@ -205,9 +206,10 @@ def clean_zillow(df):
     # create a categorical version of target by splitting into quartiles
     df['logerror_quartiles'] = pd.qcut(df.logerror, q=4, labels=['q1', 'q2', 'q3', 'q4'])
     
+    # Drop unnecessary/redundant columns
+    df = df.drop(['rawcensustractandblock', 'regionidcity', 'zip_code', 'roomcnt', 'unitcnt', 'transactiondate'],axis=1)
     
     return df
-
 
 
 
@@ -242,6 +244,35 @@ def wrangle_zillow():
     
     df = clean_zillow(zillow17())
     return split_zillow(df)
+
+
+
+
+
+
+def train_validate_test_split(df, target, seed):
+    '''
+    spilts our data  into train, validate, test
+    '''
+    # Train, Validate, and test
+    train_and_validate, test = train_test_split(
+        df, test_size=0.2, random_state=seed)
+    train, validate = train_test_split(
+        train_and_validate,
+        test_size=0.3,
+        random_state=seed)
+    # Split with X and y
+    X_train = train.drop(columns=[target])
+    y_train = train[target]
+    X_validate = validate.drop(columns=[target])
+    y_validate = validate[target]
+    X_test = test.drop(columns=[target])
+    y_test = test[target]
+    return X_train, y_train, X_validate, y_validate, X_test, y_test 
+
+
+
+
 
 
 def get_object_cols(df):
